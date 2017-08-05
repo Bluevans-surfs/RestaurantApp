@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Hot Restaurant</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="jumbotron text-center">
+    
+
+       <h1><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Hot Restaurant</h1>
+
+       <hr>
+
+           <p>Current reservations and waiting list.</p>
+           <br>
+  
+           <p><a class="btn btn-primary btn-lg" href="table.html" role="button"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"> </span> View Tables</a> <a class="btn btn-default btn-lg" href="index.html" role="button"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span></a></p>
+      </div>
+      </div>
+</div>
+
+<div class="container">
+
+<div class="row">
+      <div class="col-lg-12">
+
+        <!-- Reservation Page -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Table Reservation</h4>
+          </div>
+          <div class="panel-body">
+
+            <form role="form">
+
+              <div class="form-group">
+                <label for="">Name</label>
+                <input type="text" class="form-control" id="reserve_name">
+              </div>
+
+              <div class="form-group">
+                <label for="">Phone Number</label>
+                <input type="text" class="form-control" id="reserve_phone">
+              </div>
+
+              <div class="form-group">
+                <label for="">Email</label>
+                <input type="text" class="form-control" id="reserve_email">
+              </div>
+
+              <div class="form-group">
+                <label for="">Unique ID</label>
+                <input type="text" class="form-control" id="reserve_uniqueID">
+              </div>
+
+              <button type="submit" id="submit" class="btn btn-primary submit">Submit</button>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+      <footer class="footer">
+        <div class="container">
+          <p><a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a> </p>
+        </div>
+      </footer>
+
+  </div>
+
+<script type="text/javascript"></script>
+
+<script src="https://code.jquery.com/jquery.js">
+  $(currentReservations).val();
+
+
+ 
+$("#submit").on("click", function(event) {
+  event.preventDefault();
+
+var customerInfo = {
+        Name: $("#reserve_name").val().trim(),
+        PhoneNumber: $("#reserve_phone").val().trim(),
+        Email: $("#reserve_email").val().trim(),
+        customerID: $("#reserve_uniqueID").val().trim()
+      };
+
+console.log(customerInfo);
+
+$.post("/api/table", customerInfo, function(data) {
+
+  if (data) {
+    alert("Yey! You are officially booked!");
+  }
+
+  else {
+    alert("Sorry, we are booked. You will be placed on the waitlist.");
+  }
+
+
+
+  });
+
+
+</script>
+
+</body>
